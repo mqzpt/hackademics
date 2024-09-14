@@ -3,125 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generate AI-Powered Anki Decks</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 2rem;
-        background-color: #333;
-        color: whitesmoke;
-      }
-      h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      input[type="text"],
-      button {
-        padding: 1rem;
-        font-size: 1.2rem;
-        border-radius: 10px;
-        border: none;
-        background: #444;
-        color: whitesmoke;
-      }
-      button {
-        background-color: #61dafb;
-        cursor: pointer;
-      }
-      #drop-area {
-        border: 2px dashed #61dafb;
-        padding: 2rem;
-        text-align: center;
-        font-size: 1.2rem;
-        border-radius: 10px;
-        transition: background-color 0.3s ease;
-      }
-      #drop-area.dragging {
-        background-color: #444;
-      }
-    </style>
+    <title>Welcome to AI-Powered Anki Decks</title>
+
+    <!-- Link to Google Fonts and external CSS -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
   </head>
   <body>
-    <h1>Generate AI-Powered Anki Decks!</h1>
+    <div class="container">
+      <h1>Welcome to our AI-Powered Anki Deck Generator</h1>
+      <p>
+        This tool allows you to generate Anki decks from a .txt file using AI.
+        Simply upload a file, and we'll automatically create question and answer
+        pairs for your deck.
+      </p>
 
-    <form
-      action="/upload"
-      method="POST"
-      enctype="multipart/form-data"
-      id="upload-form"
-    >
-      <!-- Field to enter the name of the Anki deck -->
-      <input
-        type="text"
-        name="deck_name"
-        id="deck_name"
-        placeholder="Enter deck name"
-        required
-      />
+      <!-- Call-to-action -->
+      <a href="/generate" class="btn">Start Generating Your Anki Deck!</a>
 
-      <!-- Drag-and-drop area -->
-      <div id="drop-area">
-        <p>Drag and drop your .txt file here, or click to select a file</p>
-        <input
-          type="file"
-          name="txt_file"
-          id="txt_file"
-          accept=".txt"
-          hidden
-          required
+      <!-- Powered by Cohere Section -->
+      <section class="cohere-powered">
+        <p>
+          This project is proudly powered by <strong>Cohere</strong>, providing
+          cutting-edge natural language processing (NLP) capabilities to
+          automatically generate accurate and effective Anki decks for your
+          study needs.
+        </p>
+        <img
+          src="/static/images/cohere-logo.svg"
+          alt="Powered by Cohere"
+          class="cohere-logo"
         />
-      </div>
+      </section>
 
-      <!-- Submit button -->
-      <button type="submit">Submit</button>
-    </form>
+      <!-- Features Section -->
+      <section class="features">
+        <h2>Features You'll Love!</h2>
+        <div class="feature-list">
+          <div class="feature-item">
+            <h3>Easy Upload</h3>
+            <p>
+              Upload your text files seamlessly and let the AI handle the rest.
+            </p>
+          </div>
+          <div class="feature-item">
+            <h3>Customizable Decks</h3>
+            <p>Tailor the generated decks to fit your learning preferences.</p>
+          </div>
+          <div class="feature-item">
+            <h3>AI-Driven Accuracy</h3>
+            <p>
+              Our AI ensures high-quality question and answer pairs for
+              effective study sessions.
+            </p>
+          </div>
+        </div>
+      </section>
 
-    <script>
-      // Grab the drop area and file input elements
-      const dropArea = document.getElementById("drop-area");
-      const fileInput = document.getElementById("txt_file");
+      <!-- Voice to Anki Section -->
+      <section class="voice-to-anki">
+        <h2>Convert Your Lectures into Anki Decks</h2>
+        <p>
+          Use our AI-powered tool to convert your recorded lectures into study
+          material. Upload your audio file, and we'll automatically create
+          question and answer pairs for your Anki deck.
+        </p>
+        <form
+          action="/upload-audio"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <input type="file" name="audio-file" accept="audio/*" required />
+          <button type="submit" class="btn">Upload and Convert</button>
+        </form>
+      </section>
 
-      // Prevent default behavior (Prevent file from being opened)
-      ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
-        dropArea.addEventListener(eventName, (e) => e.preventDefault());
-        dropArea.addEventListener(eventName, (e) => e.stopPropagation());
-      });
+      <!-- Testimonials Section -->
+      <section class="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial-item">
+          <p>"This is a game-changer! I generated a deck in minutes."</p>
+          <span>- John D.</span>
+        </div>
+        <div class="testimonial-item">
+          <p>
+            "AI-Powered Anki Decks has streamlined my study process like never
+            before."
+          </p>
+          <span>- Sarah K.</span>
+        </div>
+      </section>
 
-      // Highlight drop area when file is dragged over
-      ["dragenter", "dragover"].forEach((eventName) => {
-        dropArea.addEventListener(eventName, () => {
-          dropArea.classList.add("dragging");
-        });
-      });
+      <!-- Newsletter Signup -->
+      <section class="newsletter">
+        <h2>Stay Updated</h2>
+        <p>
+          Sign up for our newsletter to get the latest updates and features.
+        </p>
+        <form action="/subscribe" method="POST">
+          <input type="email" placeholder="Your Email" required />
+          <button type="submit" class="btn">Subscribe</button>
+        </form>
+      </section>
 
-      ["dragleave", "drop"].forEach((eventName) => {
-        dropArea.addEventListener(eventName, () => {
-          dropArea.classList.remove("dragging");
-        });
-      });
-
-      // Handle dropped files
-      dropArea.addEventListener("drop", (e) => {
-        const files = e.dataTransfer.files;
-        fileInput.files = files; // Populate file input with dropped file
-        dropArea.querySelector("p").textContent = files[0].name;
-      });
-
-      // Allow click on drop area to trigger file selection
-      dropArea.addEventListener("click", () => fileInput.click());
-
-      // Update drop area when file is selected via click
-      fileInput.addEventListener("change", () => {
-        const file = fileInput.files[0];
-        if (file) {
-          dropArea.querySelector("p").textContent = file.name;
-        }
-      });
-    </script>
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2024 AI-Powered Anki Decks. All rights reserved.</p>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com" target="_blank">
+            <img
+              src="{{ url_for('static', filename='images/linkedin-icon.svg') }}"
+              alt="LinkedIn"
+            />
+          </a>
+          <a href="https://www.twitter.com" target="_blank">
+            <img
+              src="{{ url_for('static', filename='images/twitter-icon.svg') }}"
+              alt="Twitter"
+            />
+          </a>
+          <a href="mailto:contact@example.com">
+            <img
+              src="{{ url_for('static', filename='images/email-icon.svg') }}"
+              alt="Email"
+            />
+          </a>
+        </div>
+        <div class="cohere-footer">
+          <p>Powered by</p>
+          <img
+            src="{{ url_for('static', filename='images/cohere-logo.svg') }}"
+            alt="Cohere Logo"
+          />
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
