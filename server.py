@@ -29,29 +29,33 @@ def upload_file():
     # Get the deck name from the form
     deck_name = request.form.get("deck_name", "Unnamed Deck")
 
-    # Check if a file was uploaded
-    if "txt_file" not in request.files:
-        return "No file part", 400
+    # Check if user submitted text directly
+    text_input = request.form.get("text_input", None)
 
-    file = request.files["txt_file"]
+    if text_input:
+        # If the user provided text input, process it directly
+        text_input = feed_cohere_text(text_input)
+        generate_apkg_from_text(text_input, deck_name)
+    elif "txt_file" in request.files:
+        # Otherwise, process the uploaded .txt file
+        file = request.files["txt_file"]
 
-    if file.filename == "":
-        return "No selected file", 400
+        if file.filename == "":
+            return "No selected file", 400
 
-    # Save the uploaded file to the 'uploads' directory
-    file_path = os.path.join("uploads", file.filename)
-    file.save(file_path)
+        # Save the uploaded file to the 'uploads' directory
+        file_path = os.path.join("uploads", file.filename)
+        file.save(file_path)
 
-    # Read the file content
-    with open(file_path, "r") as f:
-        file_content = f.read()
+        # Read the file content
+        with open(file_path, "r") as f:
+            file_content = f.read()
 
-    # Generate the Anki deck using the file content
-    generate_apkg_from_text(file_content, deck_name)
+        # Generate the Anki deck using the file content
+        text_input = feed_cohere_text(text_input)
+        generate_apkg_from_text(file_content, deck_name)
 
-    # Send the generated .apkg file back to the user for download
-    apkg_filename = f"{deck_name}.apkg"
-    return send_file(apkg_filename, as_attachment=True)
+    return send_file(f"{deck_name}.apkg", as_attachment=True)
 
 
 if __name__ == "__main__":
