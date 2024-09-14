@@ -1,0 +1,66 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    padding: 2rem;
+    background: linear-gradient(135deg, #1f1c2c, #928DAB); /* Adds a gradient background */
+    color: #f1f1f1; /* Soft off-white color */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
+    font-size: 1.8rem; /* Adjusted font size */
+    transition: background 0.3s ease-in-out; /* Smooth transition effect */
+}
+
+/* Input and Button Styling */
+input, button {
+    font-size: 1.8rem; /* Adjusted font size for consistency */
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    border: none; /* Remove default borders */
+    background: rgba(255, 255, 255, 0.1); /* Transparent background with a soft white tint */
+    color: #f1f1f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a soft shadow */
+    outline: none; /* Removes input outline */
+    transition: all 0.3s ease-in-out; /* Smooth hover transitions */
+}
+
+/* Button hover effect */
+button:hover {
+    background: #61dafb; /* Light cyan-blue hover effect */
+    color: #333;
+    cursor: pointer;
+    transform: translateY(-3px); /* Subtle hover lift effect */
+}
+
+/* Input focus effect */
+input:focus {
+    background: rgba(255, 255, 255, 0.2); /* Changes input background on focus */
+    border: 2px solid #61dafb; /* Light blue border on focus */
+}
+
+/* Button active effect */
+button:active {
+    transform: translateY(0); /* Pushes the button down slightly on click */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    body {
+        font-size: 1.6rem; /* Smaller font for mobile screens */
+    }
+
+    input, button {
+        font-size: 1.6rem;
+        padding: 0.8rem 1.2rem;
+    }
+}
