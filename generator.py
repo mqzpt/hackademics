@@ -63,12 +63,8 @@ def feed_cohere_text(text):
         answer = answer_response.generations[0].text.strip()
         q_a_dictionary.append({"question": question, "answer": answer})
 
-    return q_a_dictionary
-
-
-def process_cohere_api_response(response):
     formatted_output = ""
-    for item in response:
+    for item in q_a_dictionary:
         formatted_output += f"{item['question']}\n{item['answer']}\n\n"
     return formatted_output
 
@@ -134,9 +130,6 @@ if __name__ == "__main__":
 
     # Call the Cohere API to generate accurate questions and answers
     questions_and_answers = feed_cohere_text(text_to_process)
-
-    # Call the processing function to standardize the output
-    questions_and_answers = process_cohere_api_response(questions_and_answers)
 
     # Generate the Anki Deck from our formatted text
     generate_apkg_from_text(questions_and_answers, deck_name=deck_name)
