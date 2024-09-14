@@ -1,5 +1,6 @@
 annotated-types==0.7.0
 anyio==4.4.0
+black==24.8.0
 blinker==1.8.2
 boto3==1.35.19
 botocore==1.35.19
@@ -25,8 +26,11 @@ itsdangerous==2.2.0
 Jinja2==3.1.4
 jmespath==1.0.1
 MarkupSafe==2.1.5
+mypy-extensions==1.0.0
 packaging==24.1
 parameterized==0.9.0
+pathspec==0.12.1
+platformdirs==4.3.3
 pydantic==2.9.1
 pydantic_core==2.23.3
 python-dateutil==2.9.0.post0
@@ -41,4 +45,5 @@ tqdm==4.66.5
 types-requests==2.32.0.20240914
 typing_extensions==4.12.2
 urllib3==2.2.3
+waitress==3.0.0
 Werkzeug==3.0.4
