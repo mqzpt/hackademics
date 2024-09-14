@@ -387,3 +387,40 @@ footer .social-icons img {
 footer .social-icons img:hover {
     transform: scale(1.1);
 }
+
+/* Cohere Section */
+.cohere-powered {
+    margin: 2rem 0;
+    text-align: center;
+    color: #ddd;
+}
+
+.cohere-powered p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.cohere-logo {
+    width: 150px;
+    height: auto;
+}
+
+/* Footer Cohere Logo */
+.cohere-footer {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.cohere-footer p {
+    color: #ddd;
+    font-size: 1rem;
+}
+
+.cohere-footer img {
+    width: 100px;
+    height: auto;
+}
