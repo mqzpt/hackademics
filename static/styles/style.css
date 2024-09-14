@@ -164,3 +164,226 @@ a.btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* Textarea Styling */
+textarea {
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease;
+    resize: none; /* Prevents resizing */
+}
+
+textarea::placeholder {
+    color: #ccc;
+}
+
+textarea:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #61dafb;
+}
+
+/* General Container Styling */
+.container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    max-width: 800px; /* Increased max-width for better spacing */
+    margin: 2rem auto;
+}
+
+/* Heading and Paragraph Styling */
+h1, h2 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 3rem;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #ddd;
+    max-width: 700px; /* Controls text width for readability */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Feature Section */
+.features {
+    margin-top: 3rem;
+}
+
+.feature-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.feature-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: left;
+    flex: 1 1 calc(33% - 2rem); /* Makes feature items flexible */
+    min-width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.feature-item p {
+    color: #ddd;
+    line-height: 1.5;
+}
+
+/* Voice to Anki Section */
+.voice-to-anki {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.voice-to-anki h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
+.voice-to-anki p {
+    color: #ddd;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.voice-to-anki form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.voice-to-anki input[type="file"] {
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    max-width: 400px; /* Adjusts width of the file input */
+}
+
+.voice-to-anki button {
+    background-color: #61dafb;
+    color: #333;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Testimonials Section */
+.testimonials {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.testimonial-item {
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-item p {
+    font-size: 1.2rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+}
+
+.testimonial-item span {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+/* Newsletter Section */
+.newsletter {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.newsletter form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.newsletter input[type="email"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-radius: 10px;
+}
+
+.newsletter button {
+    padding: 1rem 2rem;
+    background-color: #61dafb;
+    color: #333;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Footer Section */
+footer {
+    margin-top: 4rem;
+    text-align: center;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+footer .social-icons {
+    margin-top: 1rem;
+}
+
+footer .social-icons a {
+    margin: 0 1rem;
+    display: inline-block;
+}
+
+footer .social-icons img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+footer .social-icons img:hover {
+    transform: scale(1.1);
+}
