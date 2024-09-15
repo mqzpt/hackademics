@@ -91,26 +91,60 @@ def generate_flashcards():
         questions_response = co.generate(
             model='command-xlarge-nightly',
             prompt=f"Create a list of questions from the following summary:\n\n{summary}",
-            max_tokens=1000,
+            max_tokens=2000,
             temperature=0.7,
         )
+        # Retrieve questions from the response
         questions = [gen.text.strip() for gen in questions_response.generations]
 
+        # Remove the introductory part (first 61 characters) from each question
+        print(questions)
+        questions = [q[62:].strip() for q in questions]
+        print(questions)
+
         flashcards = []
-        for question in questions:
+
+        for index, question in enumerate(questions, start=1):
+            # Generate the answer for the current question
             answer_response = co.generate(
                 model='command-xlarge-nightly',
                 prompt=f"Provide a concise answer to the following question based on the text: {text}\n\nQuestion: {question}",
-                max_tokens=1000,
+                max_tokens=2000,
                 temperature=0.7,
             )
             answer = answer_response.generations[0].text.strip()
+            
+            # Append the question and answer to the flashcards list with proper numbering
             flashcards.append({
-                "question": question,
-                "answer": answer
+                "question": f"{question}",
+                "answer": f"{answer}"
             })
+            questions = flashcards[0]['question'].split('?')
+            questions = [q.strip() + '?' for q in questions if q.strip()]  # Ensuring proper formatting
+            
+            # Splitting the answers by '\n\n7.'
+            answers = flashcards[0]['answer'].split('\n\n7.')
+            answers = [a.strip() for a in answers if a.strip()]  # Ensuring proper formatting
+            quest = []
+            for i in range(len(questions)):
+                quest.append(questions[i].split(',')[0])  
 
-        return jsonify({'flashcards': flashcards}), 200
+            split_by_newline = answers[0].split('\n')
+            
+# Removing any leading/trailing whitespaces and empty strings
+            split_by_newline = [answer.strip() for answer in split_by_newline if answer.strip()]
+
+            
+            print("/////////////////////////", split_by_newline)
+            print("*************************", quest)
+            if len(quest)!=len(split_by_newline):
+                min_len = min(len(quest), len(split_by_newline))
+                quest=quest[:min_len]
+                split_by_newline=split_by_newline[:min_len]
+
+
+
+        return jsonify({'Questions': quest,"Answers":split_by_newline}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

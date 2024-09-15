@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+
 import { NextSeo } from "next-seo";
 
 export default function Contact() {
@@ -32,7 +32,7 @@ export default function Contact() {
         </a>
       </div>
       <div className="mt-64"></div>
-      <Footer />
+  
     </div>
   );
 }
