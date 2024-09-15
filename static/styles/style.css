@@ -408,19 +408,20 @@ footer .social-icons img:hover {
 
 /* Footer Cohere Logo */
 .cohere-footer {
-    margin-top: 2rem;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-}
-
-.cohere-footer p {
-    color: #ddd;
-    font-size: 1rem;
-}
-
-.cohere-footer img {
-    width: 100px;
+    align-items: center;
+    gap: 8px; /* Adds a small space between the text and the logo */
+    margin-top: 10px;
+  }
+  
+  .cohere-footer p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .cohere-footer img.cohere-logo-inline {
+    width: 120px; /* Adjust size as needed */
     height: auto;
-}
+  }
+  
