@@ -18,7 +18,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-# Function to extract text from a PDF
 def extract_text_from_pdf(pdf_path):
     text = ""
     with pdfplumber.open(pdf_path) as pdf:
@@ -26,7 +25,6 @@ def extract_text_from_pdf(pdf_path):
             text += page.extract_text()
     return text
 
-# Function to extract text from a DOCX file
 def extract_text_from_docx(docx_path):
     doc = docx.Document(docx_path)
     text = []
@@ -34,7 +32,6 @@ def extract_text_from_docx(docx_path):
         text.append(para.text)
     return "\n".join(text)
 
-# Function to extract text from PPTX (PowerPoint) file
 def pptx_to_text(pptx_file):
     prs = Presentation(pptx_file)
     all_text = []
@@ -44,12 +41,9 @@ def pptx_to_text(pptx_file):
                 all_text.append(shape.text)
     return "\n".join(all_text)
 
-# Function to transcribe audio (replace with your audio transcription API logic)
 def transcribe_audio(api_key, audio_file):
-    # This is a placeholder function, replace it with actual transcription logic
     return "Transcribed audio text here..."
 
-# Wrapper function to detect file type and convert to text
 def convert_to_text(file, file_type):
     if file_type == 'pdf':
         return extract_text_from_pdf(file)
@@ -58,17 +52,16 @@ def convert_to_text(file, file_type):
     elif file_type == 'pptx':
         return pptx_to_text(file)
     elif file_type == 'audio':
-        api_key = "your-audio-api-key"  # Replace with your actual API key
+        api_key = "your-audio-api-key"  
         return transcribe_audio(api_key, file)
     else:
         return None
 
-# Endpoint to handle both text and file uploads
 @app.route("/api/generate_flashcards", methods=['POST'])
 def generate_flashcards():
     if 'file' in request.files:
         file = request.files['file']
-        file_type = file.filename.rsplit('.', 1)[1].lower()  # Get file extension
+        file_type = file.filename.rsplit('.', 1)[1].lower()  
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
         text = convert_to_text(file_path, file_type)
@@ -111,6 +104,51 @@ def generate_flashcards():
             })
 
         return jsonify({'flashcards': flashcards}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route("/api/generate_quiz", methods=['POST'])
+def generate_quiz():
+    if 'file' in request.files:
+        file = request.files['file']
+        file_type = file.filename.rsplit('.', 1)[1].lower()  
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(file_path)
+        text = convert_to_text(file_path, file_type)
+    else:
+        data = request.get_json()
+        text = data.get('text', '')
+
+    if not text:
+        return jsonify({'error': 'Text is missing or invalid file type'}), 400
+
+    try:
+        questions_response = co.generate(
+            model='command-xlarge-nightly',
+            prompt=f"Generate multiple-choice quiz questions from the following text:\n\n{text}",
+            max_tokens=1000,
+            temperature=0.7,
+        )
+        questions = [gen.text.strip() for gen in questions_response.generations]
+
+        quiz = []
+        for question in questions:
+            answer_response = co.generate(
+                model='command-xlarge-nightly',
+                prompt=f"Provide possible answers to the following quiz question:\n\nQuestion: {question}",
+                max_tokens=1000,
+                temperature=0.7,
+            )
+            correct_answer = answer_response.generations[0].text.strip()
+
+            quiz.append({
+                "question": question,
+                "correct_answer": correct_answer,
+                "answers": ["Option 1", "Option 2", correct_answer, "Option 4"]  
+            })
+
+        return jsonify({'quiz': quiz}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
