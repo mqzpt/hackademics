@@ -5,6 +5,7 @@ import random
 import requests
 import genanki
 import pdfplumber
+import assemblyai as aai
 import os
 
 load_dotenv()
@@ -12,6 +13,10 @@ load_dotenv()
 
 def get_cohere_token():
     return os.getenv("COHERE_API_KEY")
+
+
+def get_assembly_ai_token():
+    return os.getenv("ASSEMBLY_AI_API_KEY")
 
 
 def feed_cohere_text(text):
@@ -127,6 +132,14 @@ def extract_text_from_pdf(pdf_path):
         for page in pdf.pages:
             text += page.extract_text()
     return text
+
+
+def transcribe_audio(audio_file):
+
+    aai.settings.api_key = get_assembly_ai_token()
+    transcriber = aai.Transcriber()
+    transcript = transcriber.transcribe(audio_file)
+    return transcript.text
 
 
 if __name__ == "__main__":

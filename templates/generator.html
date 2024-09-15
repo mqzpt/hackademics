@@ -47,14 +47,14 @@
         <!-- Drag-and-drop area -->
         <div id="drop-area">
           <p>
-            Drag and drop your .txt or .pdf file here, or click to select a file
+            Drag and drop your .txt, .pdf, or audio file here, or click to
+            select a file
           </p>
-          <!-- The hidden attribute should not have "hidden />" as text -->
           <input
             type="file"
             name="txt_file"
             id="txt_file"
-            accept=".txt,.pdf"
+            accept=".txt,.pdf,audio/*"
             hidden
           />
         </div>
@@ -95,13 +95,15 @@
 
         if (
           file &&
-          (file.type === "text/plain" || file.type === "application/pdf")
+          (file.type === "text/plain" ||
+            file.type === "application/pdf" ||
+            file.type.startsWith("audio/"))
         ) {
           fileInput.files = files; // Populate file input with dropped file
           dropArea.querySelector("p").textContent = file.name; // Display file name
         } else {
           dropArea.querySelector("p").textContent =
-            "Invalid file type. Please upload a .txt or .pdf file.";
+            "Invalid file type. Please upload a .txt, .pdf, or audio file.";
         }
       });
 
@@ -113,12 +115,14 @@
         const file = fileInput.files[0];
         if (
           file &&
-          (file.type === "text/plain" || file.type === "application/pdf")
+          (file.type === "text/plain" ||
+            file.type === "application/pdf" ||
+            file.type.startsWith("audio/"))
         ) {
           dropArea.querySelector("p").textContent = file.name;
         } else {
           dropArea.querySelector("p").textContent =
-            "Invalid file type. Please upload a .txt or .pdf file.";
+            "Invalid file type. Please upload a .txt, .pdf, or audio file.";
         }
       });
     </script>

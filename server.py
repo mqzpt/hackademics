@@ -1,5 +1,10 @@
 from flask import Flask, render_template, request, send_file
-from generator import feed_cohere_text, generate_apkg_from_text, extract_text_from_pdf
+from generator import (
+    transcribe_audio,
+    feed_cohere_text,
+    generate_apkg_from_text,
+    extract_text_from_pdf,
+)
 import os
 
 app = Flask(__name__)
@@ -56,8 +61,14 @@ def upload_file():
         elif file.filename.endswith(".pdf"):
             # Extract text from the PDF
             file_content = extract_text_from_pdf(file_path)
+        elif file.filename.endswith(".mp3"):
+            # Transcribe text from the audio file
+            file_content = transcribe_audio(file_path)
         else:
-            return "Unsupported file type. Please upload a .txt or .pdf file.", 400
+            return (
+                "Unsupported file type. Please upload a .txt, .pdf, or .mp3 file.",
+                400,
+            )
 
         # Generate the Anki deck using the file content
         text_input = feed_cohere_text(file_content)
