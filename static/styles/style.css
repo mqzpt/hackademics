@@ -7,6 +7,12 @@
 
 /* Body Styling */
 body {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    border-radius: 10px;
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
     min-height: 100vh;
@@ -122,7 +128,6 @@ button:active {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     text-align: center;
-    max-width: 600px;
     margin: auto;
 }
 
@@ -196,7 +201,7 @@ textarea:focus {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     text-align: center;
-    max-width: 800px; /* Increased max-width for better spacing */
+    max-width: 1400px; /* Increased max-width for better spacing */
     margin: 2rem auto;
 }
 
@@ -531,7 +536,7 @@ input[type="email"] {
   /* Style for the form container */
 .container {
     width: 100%;
-    max-width: 800px; /* Limit maximum width to 800px */
+    max-width: 1400px; /* Limit maximum width to 800px */
     margin: 0 auto; /* Center the container */
     padding: 20px;
   }

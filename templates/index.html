@@ -17,11 +17,19 @@
   </head>
   <body>
     <div class="container">
-      <h1>Welcome to our AI-Powered Anki Deck Generator</h1>
+      <!-- Replace the heading with the logo -->
+      <img
+        src="{{ url_for('static', filename='images/hackademics-logo-white.svg') }}"
+        alt="Hackademics Logo"
+        class="logo"
+        style="max-width: 450px; margin-bottom: -10px"
+      />
+
       <p>
-        This tool allows you to generate Anki decks from a .txt file using AI.
-        Simply upload a file, and we'll automatically create question and answer
-        pairs for your deck.
+        Our free and open-source tool allows you to generate Anki decks to study
+        from given any input file using AI. Simply upload a file, and we'll
+        automatically download you an Anki compatible (.apkg) deck! Current
+        supported file types include .txt, .pdf, .docx, and .pptx.
       </p>
 
       <!-- Call-to-action -->
@@ -125,10 +133,13 @@
               alt="Twitter"
             />
           </a>
-          <a href="mailto:contact@example.com">
+          <a
+            href="https://github.com/mqzpt/hack-the-north-2024"
+            target="_blank"
+          >
             <img
-              src="{{ url_for('static', filename='images/email-icon.svg') }}"
-              alt="Email"
+              src="{{ url_for('static', filename='images/github-icon.svg') }}"
+              alt="Github"
             />
           </a>
         </div>
