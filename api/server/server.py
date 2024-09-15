@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-co = cohere.Client('DbUauyI3zFWlrXUhOrZpB2yFZszSUs8wlmbZqGfl')
+co = cohere.Client('s6QrVVNoTa8VaUiBUhWvVQk1jU0qu2E4TNw2fMyz')
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -91,7 +91,7 @@ def generate_flashcards():
         questions_response = co.generate(
             model='command-xlarge-nightly',
             prompt=f"Create a list of questions from the following summary:\n\n{summary}",
-            max_tokens=100,
+            max_tokens=1000,
             temperature=0.7,
         )
         questions = [gen.text.strip() for gen in questions_response.generations]
@@ -101,7 +101,7 @@ def generate_flashcards():
             answer_response = co.generate(
                 model='command-xlarge-nightly',
                 prompt=f"Provide a concise answer to the following question based on the text: {text}\n\nQuestion: {question}",
-                max_tokens=100,
+                max_tokens=1000,
                 temperature=0.7,
             )
             answer = answer_response.generations[0].text.strip()
