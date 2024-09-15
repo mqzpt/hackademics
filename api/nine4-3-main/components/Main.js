@@ -107,7 +107,7 @@ export default function Main() {
                 front: `Q${index + i + 1}: ${question}`, // Display question
                 back: `A${index + i + 1}: ${flashcards.answers[index + i] || "Answer not available"}` // Corresponding answer
               }}
-              className="w-1/3" // Ensure that each flashcard takes up 1/3rd of the width
+              className="w-1/3 mx-2" // Ensure that each flashcard takes up 1/3rd of the width with margin
             />
           ))}
         </div>
@@ -185,8 +185,8 @@ export default function Main() {
         {/* Display Flashcards */}
         {flashcards.questions && flashcards.answers && (
           <div className="w-full px-4 mt-10">
-            <h2 className="text-xl font-semibold">Generated Flashcards:</h2>
-            <div className="container">
+            <h2 className="text-xl font-semibold"></h2>
+            <div className="container mx-auto">
               {formatFlashcards()} {/* Render flashcards in rows of 3 */}
             </div>
           </div>

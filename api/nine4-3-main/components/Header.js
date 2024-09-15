@@ -16,14 +16,13 @@ export default function Header() {
     <>
       <div ref={topRef} /> {/* Move this div outside of the header */}
       <header className="fixed top-0 w-full clearNav z-50 bg-white">
-        <div className="max-w-5xl mx-auto flex p-5 justify-between items-center">
+        <div className="max-w-5xl mx-auto p-5 flex justify-center items-center">
           <a
             onClick={scrollToTop} // Handle click event directly
             className="text-3xl text-black font-medium cursor-pointer"
           >
             Hackademics
           </a>
-          
         </div>
       </header>
     </>
