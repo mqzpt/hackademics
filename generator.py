@@ -4,6 +4,7 @@ import cohere
 import random
 import requests
 import genanki
+import pdfplumber
 import os
 
 load_dotenv()
@@ -27,7 +28,7 @@ def feed_cohere_text(text):
     summary = summary_generated.generations[0].text.strip()
     questions_response = co.generate(
         model="command-xlarge-nightly",
-        prompt=f"Create a list of questions from the following summary:\n\n{summary}",
+        prompt=f"Create a list of questions from the following summary. Each question should start with -.\n\n{summary}",
         max_tokens=100,
         num_generations=5,
         temperature=0.7,
@@ -39,9 +40,7 @@ def feed_cohere_text(text):
         top_n=3,
         return_documents=True,
     )
-    # for result in reranked_questions.results:
-    #     print(f"Document: {result.document.text}")
-    #     print(f"Relevance Score: {result.relevance_score}\n")
+
     best_result = max(reranked_questions.results, key=lambda x: x.relevance_score)
     text_with_questions = best_result.document.text
     selected_questions = [
@@ -121,8 +120,17 @@ def generate_apkg_from_text(text, deck_name="unnamed"):
     genanki.Package(deck).write_to_file(f"{deck_name}.apkg")
 
 
+# A function to get the text from an uplaoded PDF file
+def extract_text_from_pdf(pdf_path):
+    text = ""
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text()
+    return text
+
+
 if __name__ == "__main__":
-    # CLI for testing
+    # CLI for testing text input
     print("\n*** Anki  ***\n")
 
     deck_name = input("Enter the name of the deck you wish to create: ")

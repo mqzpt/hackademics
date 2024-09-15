@@ -48,9 +48,7 @@
         <div class="feature-list">
           <div class="feature-item">
             <h3>Easy Upload</h3>
-            <p>
-              Upload your text files seamlessly and let the AI handle the rest.
-            </p>
+            <p>Upload your files seamlessly and let the AI handle the rest.</p>
           </div>
           <div class="feature-item">
             <h3>Customizable Decks</h3>
@@ -59,8 +57,8 @@
           <div class="feature-item">
             <h3>AI-Driven Accuracy</h3>
             <p>
-              Our AI ensures high-quality question and answer pairs for
-              effective study sessions.
+              Our AI ensures high-quality question and answer pairs or quizzes
+              for effective study sessions.
             </p>
           </div>
         </div>
@@ -106,12 +104,11 @@
         <p>
           Sign up for our newsletter to get the latest updates and features.
         </p>
-        <form action="/subscribe" method="POST">
+        <form action="/subscribe" method="POST" class="newsletter-form">
           <input type="email" placeholder="Your Email" required />
           <button type="submit" class="btn">Subscribe</button>
         </form>
       </section>
-
       <!-- Footer -->
       <footer>
         <p>&copy; 2024 AI-Powered Anki Decks. All rights reserved.</p>
@@ -140,6 +137,7 @@
           <img
             src="{{ url_for('static', filename='images/cohere-logo.svg') }}"
             alt="Cohere Logo"
+            class="cohere-logo-inline"
           />
         </div>
       </footer>

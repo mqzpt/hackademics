@@ -408,19 +408,189 @@ footer .social-icons img:hover {
 
 /* Footer Cohere Logo */
 .cohere-footer {
-    margin-top: 2rem;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Adds a small space between the text and the logo */
+    margin-top: 10px;
+  }
+  
+  .cohere-footer p {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .cohere-footer img.cohere-logo-inline {
+    width: 120px; /* Adjust size as needed */
+    height: auto;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    width: 100%; /* Full width of the container */
+  }
+
+input[type="email"] {
+  width: 100%; /* Take full width of the form container */
+  max-width: 500px; /* Max width for larger screens */
+  padding: 20px; /* Make the input larger */
+  margin-bottom: 15px; /* Space between the input and button */
+  font-size: 18px; /* Larger font size */
+  box-sizing: border-box; /* Include padding in width */
+  border-radius: 10px; /* Rounded corners */
+  border: 1px solid #ccc; /* Border for the input */
+  text-align: center; /* Center text */
 }
 
-.cohere-footer p {
-    color: #ddd;
-    font-size: 1rem;
+/* Style for the button */
+.btn {
+  width: 100%; /* Full width of the form container */
+  max-width: 500px; /* Max width for larger screens */
+  padding: 20px; /* Larger button */
+  background-color: #00CFFF; /* Button background color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 18px; /* Larger font size */
+  border-radius: 10px; /* Match border-radius */
+  text-align: center; /* Center text */
 }
 
-.cohere-footer img {
-    width: 100px;
-    height: auto;
+@media (max-width: 600px) {
+  /* Shrink input and button on smaller screens */
+  input[type="email"], .btn {
+    max-width: 90%; /* Take up 90% of the screen width on small screens */
+  }
 }
+  
+/* General styles for the form container */
+.newsletter {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  /* Center the form and make it responsive */
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px; /* Max width for larger screens */
+    margin: 0 auto; /* Center form horizontally */
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for the input field */
+  .newsletter-form input[type="email"] {
+    width: 100%; /* Full width for responsiveness */
+    padding: 20px; /* Larger padding for input */
+    margin-bottom: 15px; /* Spacing between input and button */
+    font-size: 18px; /* Larger font for better readability */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #ccc; /* Input border */
+    box-sizing: border-box; /* Ensure padding doesn't break the layout */
+    text-align: center; /* Center text in the input */
+  }
+  
+  /* Style for the button */
+  .newsletter-form .btn {
+    width: 100%; /* Full width for responsiveness */
+    padding: 20px; /* Larger button padding */
+    background-color: #00CFFF; /* Button color */
+    color: white;
+    font-size: 18px; /* Larger font size */
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    text-align: center; /* Center text */
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 600px) {
+    .newsletter-form input[type="email"], 
+    .newsletter-form .btn {
+      max-width: 90%; /* Limit width on smaller screens */
+    }
+  }
+  
+  /* Media query for very small screens */
+  @media (max-width: 400px) {
+    .newsletter-form input[type="email"], 
+    .newsletter-form .btn {
+      max-width: 100%; /* Full width on very small screens */
+      padding: 15px; /* Adjust padding for smaller devices */
+    }
+  }
+  
+  /* Style for the form container */
+.container {
+    width: 100%;
+    max-width: 800px; /* Limit maximum width to 800px */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+  }
+  
+  /* Style for the input field (deck name) */
+  input[type="text"] {
+    width: 100%; /* Full width */
+    padding: 15px; /* Add padding for better appearance */
+    font-size: 18px; /* Increase font size */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+    margin-bottom: 15px; /* Space between elements */
+    box-sizing: border-box; /* Include padding in width */
+  }
+  
+  /* Style for the textarea (text input) */
+  textarea {
+    width: 100%; /* Full width */
+    padding: 15px; /* Add padding for better appearance */
+    font-size: 18px; /* Increase font size */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #ccc; /* Light border */
+    margin-bottom: 15px; /* Space between elements */
+    box-sizing: border-box; /* Include padding in width */
+    resize: vertical; /* Allow vertical resizing */
+  }
+  
+  /* Style for the drop area */
+  #drop-area {
+    width: 100%; /* Full width */
+    padding: 30px; /* Add padding for larger drop area */
+    font-size: 18px; /* Increase font size */
+    border: 2px dashed #00CFFF; /* Dashed border */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center;
+    margin-bottom: 20px; /* Space between elements */
+    cursor: pointer;
+  }
+  
+  /* Style for the submit button */
+  button[type="submit"] {
+    width: 100%; /* Full width */
+    padding: 15px; /* Larger padding for the button */
+    background-color: #00CFFF; /* Button color */
+    color: white;
+    font-size: 18px; /* Increase font size */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 600px) {
+    .container {
+      padding: 10px; /* Reduce padding on small screens */
+    }
+  
+    input[type="text"], textarea, #drop-area, button[type="submit"] {
+      font-size: 16px; /* Reduce font size slightly on small screens */
+    }
+  }
+  

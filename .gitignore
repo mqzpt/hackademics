@@ -4,3 +4,4 @@ uploads/
 .vscode/
 .venv
 .env
+*.apkg

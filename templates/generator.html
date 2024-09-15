@@ -46,12 +46,15 @@
 
         <!-- Drag-and-drop area -->
         <div id="drop-area">
-          <p>Drag and drop your .txt file here, or click to select a file</p>
+          <p>
+            Drag and drop your .txt or .pdf file here, or click to select a file
+          </p>
+          <!-- The hidden attribute should not have "hidden />" as text -->
           <input
             type="file"
             name="txt_file"
             id="txt_file"
-            accept=".txt"
+            accept=".txt,.pdf"
             hidden
           />
         </div>
@@ -88,8 +91,18 @@
       // Handle dropped files
       dropArea.addEventListener("drop", (e) => {
         const files = e.dataTransfer.files;
-        fileInput.files = files; // Populate file input with dropped file
-        dropArea.querySelector("p").textContent = files[0].name;
+        const file = files[0];
+
+        if (
+          file &&
+          (file.type === "text/plain" || file.type === "application/pdf")
+        ) {
+          fileInput.files = files; // Populate file input with dropped file
+          dropArea.querySelector("p").textContent = file.name; // Display file name
+        } else {
+          dropArea.querySelector("p").textContent =
+            "Invalid file type. Please upload a .txt or .pdf file.";
+        }
       });
 
       // Allow click on drop area to trigger file selection
@@ -98,8 +111,14 @@
       // Update drop area when file is selected via click
       fileInput.addEventListener("change", () => {
         const file = fileInput.files[0];
-        if (file) {
+        if (
+          file &&
+          (file.type === "text/plain" || file.type === "application/pdf")
+        ) {
           dropArea.querySelector("p").textContent = file.name;
+        } else {
+          dropArea.querySelector("p").textContent =
+            "Invalid file type. Please upload a .txt or .pdf file.";
         }
       });
     </script>
