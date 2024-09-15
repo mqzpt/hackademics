@@ -59,8 +59,9 @@ function FlipCard({ card }) {
         transform,
         width: "250px",  // Square size
         height: "250px", // Square size
+        position: "relative"  // Required for the shiny effect
       }}
-      className={cn("flip-card-outer relative mx-auto", {
+      className={cn("flip-card-outer relative mx-auto shiny-effect", {
         "click-trigger": card.variant === "click",
       })}
     >

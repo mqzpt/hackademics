@@ -63,6 +63,7 @@ export default function Main() {
     e.preventDefault();
     if (textInput) {
       setLoading(true);
+      setUploading(true);  // Show loading cube
       setError(null);
       setFlashcards([]);
   
@@ -83,13 +84,16 @@ export default function Main() {
   
         // Store the questions and answers separately
         setFlashcards({ questions: data.Questions, answers: data.Answers });
+        setUploadComplete(true);  // Set the upload completion status
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
+        setUploading(false);  // Hide loading cube after processing
       }
     }
   };
+  
 
   // Format flashcards to map over both questions and answers and match them
   const formatFlashcards = () => {
@@ -135,6 +139,13 @@ export default function Main() {
         ref={sectionRef}
         className="container flex flex-col items-center justify-center mx-auto mt-20"
       >
+        {/* Centered Text */}
+        <div className="text-center mb-10">
+          <p className="text-xl font-semibold">
+            Upload a file or enter your own text to automatically create flashcards for learning and revision.
+          </p>
+        </div>
+
         <div className="flex justify-between w-full px-4 py-10 mb-10">
           {/* File Upload Section */}
           <label
@@ -179,7 +190,7 @@ export default function Main() {
         </div>
 
         {/* Loading and Error States */}
-        {loading && <p>Generating flashcards...</p>}
+        {loading && <p></p>}
         {error && <p className="text-red-500">{error}</p>}
 
         {/* Display Flashcards */}
