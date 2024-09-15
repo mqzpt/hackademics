@@ -122,7 +122,7 @@ def generate_apkg_from_text(text, deck_name="unnamed"):
 
 
 if __name__ == "__main__":
-    # CLI for testing
+    # CLI for testing text input
     print("\n*** Anki  ***\n")
 
     deck_name = input("Enter the name of the deck you wish to create: ")
