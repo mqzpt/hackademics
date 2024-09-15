@@ -6,6 +6,7 @@ import docx
 import assemblyai as aai
 from pptx import Presentation
 import os
+import random
 
 app = Flask(__name__)
 CORS(app)
@@ -124,6 +125,7 @@ def generate_quiz():
         return jsonify({'error': 'Text is missing or invalid file type'}), 400
 
     try:
+        # Generate quiz questions
         questions_response = co.generate(
             model='command-xlarge-nightly',
             prompt=f"Generate multiple-choice quiz questions from the following text:\n\n{text}",
@@ -134,21 +136,38 @@ def generate_quiz():
 
         quiz = []
         for question in questions:
-            answer_response = co.generate(
+            # Generate the correct answer
+            correct_answer_response = co.generate(
                 model='command-xlarge-nightly',
-                prompt=f"Provide possible answers to the following quiz question:\n\nQuestion: {question}",
+                prompt=f"Provide the correct answer for the following quiz question:\n\nQuestion: {question}",
                 max_tokens=1000,
                 temperature=0.7,
             )
-            correct_answer = answer_response.generations[0].text.strip()
+            correct_answer = correct_answer_response.generations[0].text.strip()
+
+            # Generate incorrect answers
+            incorrect_answers_response = co.generate(
+                model='command-xlarge-nightly',
+                prompt=f"Provide 3 plausible but incorrect answers for the following quiz question:\n\nQuestion: {question}",
+                max_tokens=1000,
+                temperature=0.7,
+            )
+            incorrect_answers = [gen.text.strip() for gen in incorrect_answers_response.generations[:3]]
+
+            # Combine the correct answer with the incorrect answers
+            answers = incorrect_answers + [correct_answer]
+
+            # Shuffle the answers to randomize their order
+            random.shuffle(answers)
 
             quiz.append({
                 "question": question,
                 "correct_answer": correct_answer,
-                "answers": ["Option 1", "Option 2", correct_answer, "Option 4"]  
+                "answers": answers  # Now the answers array contains the correct and incorrect answers
             })
 
         return jsonify({'quiz': quiz}), 200
+
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
