@@ -47,14 +47,14 @@
         <!-- Drag-and-drop area -->
         <div id="drop-area">
           <p>
-            Drag and drop your .txt, .pdf, or audio file here, or click to
-            select a file
+            Drag and drop your .txt, .pdf, .docx, .pptx, or audio file here, or
+            click to select a file
           </p>
           <input
             type="file"
             name="txt_file"
             id="txt_file"
-            accept=".txt,.pdf,audio/*"
+            accept=".txt,.pdf,.docx,.pptx,audio/*"
             hidden
           />
         </div>
@@ -97,13 +97,17 @@
           file &&
           (file.type === "text/plain" ||
             file.type === "application/pdf" ||
+            file.type ===
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || // .docx
+            file.type ===
+              "application/vnd.openxmlformats-officedocument.presentationml.presentation" || // .pptx
             file.type.startsWith("audio/"))
         ) {
           fileInput.files = files; // Populate file input with dropped file
           dropArea.querySelector("p").textContent = file.name; // Display file name
         } else {
           dropArea.querySelector("p").textContent =
-            "Invalid file type. Please upload a .txt, .pdf, or audio file.";
+            "Invalid file type. Please upload a .txt, .pdf, .docx, .pptx, or audio file.";
         }
       });
 
@@ -117,12 +121,16 @@
           file &&
           (file.type === "text/plain" ||
             file.type === "application/pdf" ||
+            file.type ===
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || // .docx
+            file.type ===
+              "application/vnd.openxmlformats-officedocument.presentationml.presentation" || // .pptx
             file.type.startsWith("audio/"))
         ) {
           dropArea.querySelector("p").textContent = file.name;
         } else {
           dropArea.querySelector("p").textContent =
-            "Invalid file type. Please upload a .txt, .pdf, or audio file.";
+            "Invalid file type. Please upload a .txt, .pdf, .docx, .pptx, or audio file.";
         }
       });
     </script>
