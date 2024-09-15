@@ -122,12 +122,12 @@ export default function Home() {
             {quiz.map((q, index) => (
               <li key={index}>
                 <strong>Question:</strong> {q.question}<br />
-                <strong>Options:</strong>
+                {/* <strong>Options:</strong>
                 <ul>
                   {q.answers.map((answer, i) => (
                     <li key={i}>{answer}</li>
                   ))}
-                </ul>
+                </ul> */}
                 <strong>Correct Answer:</strong> {q.correct_answer}
               </li>
             ))}
