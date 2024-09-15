@@ -4,6 +4,8 @@ from generator import (
     feed_cohere_text,
     generate_apkg_from_text,
     extract_text_from_pdf,
+    extract_text_from_docx,
+    extract_text_from_pptx,
 )
 import os
 
@@ -64,9 +66,15 @@ def upload_file():
         elif file.filename.endswith(".mp3"):
             # Transcribe text from the audio file
             file_content = transcribe_audio(file_path)
+        elif file.filename.endswith(".docx"):
+            # Extract text from the .docx file
+            file_content = extract_text_from_docx(file_path)
+        elif file.filename.endswith(".pptx"):
+            # Extract text from the .pptx file
+            file_content = extract_text_from_pptx(file_path)
         else:
             return (
-                "Unsupported file type. Please upload a .txt, .pdf, or .mp3 file.",
+                "Unsupported file type. Please upload a .txt, .pdf, .mp3, .docx, or .pptx file.",
                 400,
             )
 
