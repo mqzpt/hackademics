@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, send_file
-from generator import feed_cohere_text, generate_apkg_from_text
+from generator import feed_cohere_text, generate_apkg_from_text, extract_text_from_pdf
 import os
 
 app = Flask(__name__)
@@ -36,8 +36,9 @@ def upload_file():
         # If the user provided text input, process it directly
         text_input = feed_cohere_text(text_input)
         generate_apkg_from_text(text_input, deck_name)
+
     elif "txt_file" in request.files:
-        # Otherwise, process the uploaded .txt file
+        # Otherwise, process the uploaded file
         file = request.files["txt_file"]
 
         if file.filename == "":
@@ -47,13 +48,20 @@ def upload_file():
         file_path = os.path.join("uploads", file.filename)
         file.save(file_path)
 
-        # Read the file content
-        with open(file_path, "r") as f:
-            file_content = f.read()
+        # Check the file extension and process accordingly
+        if file.filename.endswith(".txt"):
+            # Read the .txt file content
+            with open(file_path, "r") as f:
+                file_content = f.read()
+        elif file.filename.endswith(".pdf"):
+            # Extract text from the PDF
+            file_content = extract_text_from_pdf(file_path)
+        else:
+            return "Unsupported file type. Please upload a .txt or .pdf file.", 400
 
         # Generate the Anki deck using the file content
-        text_input = feed_cohere_text(text_input)
-        generate_apkg_from_text(file_content, deck_name)
+        text_input = feed_cohere_text(file_content)
+        generate_apkg_from_text(text_input, deck_name)
 
     return send_file(f"{deck_name}.apkg", as_attachment=True)
 
