@@ -1,5 +1,7 @@
 from dotenv import load_dotenv
 from pprint import pprint
+from docx import Document
+from pptx import Presentation
 import cohere
 import random
 import requests
@@ -140,6 +142,24 @@ def transcribe_audio(audio_file):
     transcriber = aai.Transcriber()
     transcript = transcriber.transcribe(audio_file)
     return transcript.text
+
+
+def extract_text_from_docx(file_path):
+    doc = Document(file_path)
+    full_text = []
+    for para in doc.paragraphs:
+        full_text.append(para.text)
+    return "\n".join(full_text)
+
+
+def extract_text_from_pptx(file_path):
+    presentation = Presentation(file_path)
+    full_text = []
+    for slide in presentation.slides:
+        for shape in slide.shapes:
+            if hasattr(shape, "text"):
+                full_text.append(shape.text)
+    return "\n".join(full_text)
 
 
 if __name__ == "__main__":
